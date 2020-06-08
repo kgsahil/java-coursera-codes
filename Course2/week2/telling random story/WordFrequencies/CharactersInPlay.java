@@ -44,7 +44,7 @@ public class CharactersInPlay {
             // if(counts.get(i) > 1)
             // System.out.println(counts.get(i)+" "+characters.get(i));
         // }
-        charactersWithNumberParts(10,15);
+        charactersWithNumberParts(9,15);
         
     }
 }

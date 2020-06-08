@@ -1,6 +1,6 @@
 # java-coursera-codes
 
-PROJECT TITLE: Course 1 of the java specialization form coursera
+PROJECT TITLE: Course Codes of the java specialization form coursera
 
 PURPOSE OF PROJECT:	PURPOSE OF PROJECT: all the assignments codes
 
