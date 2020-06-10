@@ -56,8 +56,8 @@ public class WordsInFiles {
     public void tester(){
         buildWordFileMap();
         //System.out.println(maxNumber());
-        //System.out.println(wordsInNumFiles(4).size());
-        printFilesIn("tree");
+        //System.out.println(wordsInNumFiles(5).size());
+        printFilesIn("laid");
     } 
 }
 
