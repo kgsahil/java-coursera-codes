@@ -63,5 +63,90 @@ public class LogAnalyzer
          }
         return IPsOnDay;
      }
+     public HashMap<String,Integer> countVisitsPerIP(){
+        HashMap<String,Integer> uniqueCount = new HashMap<String,Integer>();
+        
+        for(LogEntry le : records){
+            String IP = le.getIpAddress();
+            
+            if(uniqueCount.containsKey(IP)){
+                uniqueCount.put(IP,uniqueCount.get(IP)+1);
+            }else{
+                uniqueCount.put(IP,1);
+            }
+        }
+        return uniqueCount;
+     }     
+     public int mostNumberVisitsByIP(HashMap<String,Integer> unique){
+        
+         int max = 0;
+         for(String IP: unique.keySet()){
+            if(max < unique.get(IP)) max = unique.get(IP);
+         }
+         return max;
+     }
+     public ArrayList<String> iPsMostVisits(HashMap<String,Integer> unique){
+         ArrayList<String> IPs = new ArrayList<String>();
+         int max = mostNumberVisitsByIP(unique);
+         for(String IP: unique.keySet()){
+            if(max == unique.get(IP)) IPs.add(IP);
+         }
+         return IPs;
+     }
+     public HashMap<String,ArrayList<String>> iPsForDays(){
+         
+         HashMap<String,ArrayList<String>> dict = new HashMap<String,ArrayList<String>>();
+         
+         for(LogEntry le: records){
+           String date =le.getAccessTime().toString().substring(4,10);
+            if(dict.containsKey(date)){
+                // if(dict.get(date).indexOf(le.getIpAddress()) == -1){
+                    ArrayList<String> IPs = dict.get(date);
+                    IPs.add(le.getIpAddress());
+                    dict.put(date,IPs);
+                // }
+            }else{
+               ArrayList<String> IPs = new ArrayList<String>();
+               IPs.add(le.getIpAddress());
+               dict.put(date,IPs);
+            }
+         }
+         return dict;
+     }
+     public  String dayWithMostIPVisits(HashMap<String,ArrayList<String>> dict){
+        String day = "";
+        int max = 0;
+        for(String d: dict.keySet()){
+            if(dict.get(d).size() > max){
+                max = dict.get(d).size();
+                day = d;
+            }
+        }
+        return day;
+     } 
      
+     public ArrayList<String> IPsWithMostVisitsOnDay(HashMap<String,ArrayList<String>> dict,String someday){
+        
+        ArrayList<String> IPsOnDay = dict.get(someday);
+        HashMap<String,Integer> uniqueCount = new HashMap<String,Integer>();
+        
+        for(String IP : IPsOnDay){
+            if(uniqueCount.containsKey(IP)){
+                uniqueCount.put(IP,uniqueCount.get(IP)+1);
+            }else{
+                uniqueCount.put(IP,1);
+            }
+        }
+        
+        ArrayList<String> IPs = iPsMostVisits(uniqueCount);
+        return IPs;
+     }
 }
+
+
+
+
+
+
+
+

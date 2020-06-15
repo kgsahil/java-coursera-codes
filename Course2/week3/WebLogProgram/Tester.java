@@ -20,32 +20,71 @@ public class Tester
     public void testLogAnalyzer() {
         // complete method
         LogAnalyzer analyzer =new LogAnalyzer();
-        analyzer.readFile("C:/Users/Admin/Desktop/sahil/coursera/java/java-coursera-codes/Course2/week3/WebLogProgram/short-test_log");
+        analyzer.readFile("short-test_log");
         analyzer.printAll();
        
     }
     public void testUniqueIP(){
         LogAnalyzer analyzer =new LogAnalyzer();
-        analyzer.readFile("C:/Users/Admin/Desktop/sahil/coursera/java/java-coursera-codes/Course2/week3/WebLogProgram/short-test_log");
+        analyzer.readFile("weblog2_log");
         int uniqueIPs = analyzer.countUniqueIPs();
         System.out.println("Unique IPs: "+uniqueIPs);
     }
     public void checkLogWithStatusCodeGreater(){
         LogAnalyzer analyzer =new LogAnalyzer();
-        analyzer.readFile("C:/Users/Admin/Desktop/sahil/coursera/java/java-coursera-codes/Course2/week3/WebLogProgram/weblog1_log");
+        analyzer.readFile("weblog1_log");
         analyzer.printAllHigherThanNum(400); 
     }
     public void checkLogWithStatusCodeInRange(){
         LogAnalyzer analyzer =new LogAnalyzer();
-        analyzer.readFile("C:/Users/Admin/Desktop/sahil/coursera/java/java-coursera-codes/Course2/week3/WebLogProgram/weblog1_log");
+        analyzer.readFile("weblog2_log");
         System.out.println("Total: "+analyzer.countUniqueIPsInRange(200,299)); 
-        System.out.println("Total: "+analyzer.countUniqueIPsInRange(300,399)); 
+        System.out.println("Total: "+analyzer.countUniqueIPsInRange(400,499)); 
     }
     public void getIPsOnDay(){
         LogAnalyzer analyzer =new LogAnalyzer();
-        analyzer.readFile("C:/Users/Admin/Desktop/sahil/coursera/java/java-coursera-codes/Course2/week3/WebLogProgram/weblog1_log");
-        ArrayList<String> IPs = analyzer.uniqueIPVisitsOnDay("Mar 24");
+        analyzer.readFile("weblog2_log");
+        ArrayList<String> IPs = analyzer.uniqueIPVisitsOnDay("Sep 27");
         //for(String IP: IPs)
         System.out.println(IPs.size());
     }
+    public void testVistisPerIP(){
+        LogAnalyzer analyzer =new LogAnalyzer();
+        analyzer.readFile("weblog2_log");
+        HashMap<String,Integer> unique = analyzer.countVisitsPerIP();
+        // for(String IP: unique.keySet())
+        // System.out.println("IP: "+IP+" visits: "+unique.get(IP));
+        System.out.println("Most visit: "+analyzer.mostNumberVisitsByIP(unique));
+        System.out.println("Most visit IPs: "+analyzer.iPsMostVisits(unique));
+    }
+    public void testIPsForDays(){
+        LogAnalyzer analyzer =new LogAnalyzer();
+        analyzer.readFile("weblog2_log");
+        HashMap<String,ArrayList<String>> daysIP = analyzer.iPsForDays();
+        for(String day: daysIP.keySet()){
+            System.out.println(day+" have "+daysIP.get(day).size()+" IPs ");
+            // for(String IP: daysIP.get(day)){
+                // System.out.println(IP);
+            // }
+        }
+        System.out.println("Day with most IP visit: "+analyzer.dayWithMostIPVisits(daysIP));
+        String someday = "Sep 29";
+         System.out.println("most IP visit on "+someday+": ");
+         for(String IP: analyzer.IPsWithMostVisitsOnDay(daysIP,someday)){
+                 System.out.println(IP);
+          }
+       
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
